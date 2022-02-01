@@ -9,18 +9,19 @@ const TheirMessage = ({ lastMessage, message }) => {
                 <div
                     className="message-avatar"
                     style={{
-                        backgroundImage: `url(${message?.sender?.avatar})`,
+                        backgroundImage:
+                            message.sender && `url(${message.sender.avatar})`,
                     }}
-                ></div>
+                />
             )}
-            {message?.attachments?.length > 0 ? (
+            {message.attachments && message.attachments.length > 0 ? (
                 <img
                     src={message.attachments[0].file}
-                    alt="message-attachments"
+                    alt="message-attachment"
+                    className="message-image"
                     style={{
                         marginLeft: isFirstMessageByUser ? "4px" : "48px",
                     }}
-                    className="message-image"
                 />
             ) : (
                 <div
@@ -30,8 +31,9 @@ const TheirMessage = ({ lastMessage, message }) => {
                         backgroundColor: "#CABCDC",
                         marginLeft: isFirstMessageByUser ? "4px" : "48px",
                     }}
-                    dangerouslySetInnerHTML={{ __html: message.text }}
-                ></div>
+                >
+                    {message.text}
+                </div>
             )}
         </div>
     );
